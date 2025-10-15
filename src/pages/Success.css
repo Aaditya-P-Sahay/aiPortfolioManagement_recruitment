@@ -65,3 +65,65 @@
   background: rgba(212, 175, 55, 0.2);
   border-color: rgba(212, 175, 55, 0.5);
 }
+
+@media (max-width: 768px) {
+  .success-page {
+    padding: 16px;
+  }
+
+  .success-card {
+    padding: 48px 32px;
+  }
+
+  .success-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+
+  .success-card h1 {
+    font-size: 26px;
+    margin-bottom: 14px;
+  }
+
+  .success-card p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .next-steps {
+    margin-top: 20px;
+  }
+
+  .home-btn {
+    padding: 12px 28px;
+    font-size: 13px;
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .success-card {
+    padding: 40px 24px;
+  }
+
+  .success-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 36px;
+  }
+
+  .success-card h1 {
+    font-size: 24px;
+  }
+
+  .success-card p {
+    font-size: 14px;
+  }
+
+  .home-btn {
+    width: 100%;
+    padding: 12px;
+  }
+}

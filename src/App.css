@@ -98,3 +98,20 @@ button {
   border-radius: 8px;
   margin: 24px 0;
 }
+
+@media (max-width: 768px) {
+  .admin-corner {
+    top: 12px;
+    right: 12px;
+  }
+
+  .admin-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  input, textarea, select {
+    padding: 10px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}

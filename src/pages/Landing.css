@@ -1,6 +1,8 @@
 .landing {
   min-height: 100vh;
-  padding: 80px 24px 40px;
+  padding: 40px 24px 24px;
+  display: flex;
+  align-items: center;
 }
 
 .landing-container {
@@ -8,38 +10,41 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
+  gap: 60px;
+  align-items: center;
+  width: 100%;
 }
 
 .landing-left {
-  position: sticky;
-  top: 100px;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo {
-  width: 140px;
-  margin-bottom: 48px;
+  width: 100px;
+  margin-bottom: 24px;
 }
 
 .project-desc h1 {
-  font-size: 42px;
+  font-size: 36px;
   font-weight: 600;
   color: #fff;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   letter-spacing: -0.5px;
+  line-height: 1.1;
 }
 
 .subtitle {
-  font-size: 18px;
+  font-size: 16px;
   color: #888;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
 .desc-content p {
   color: #aaa;
-  margin-bottom: 20px;
-  line-height: 1.7;
+  margin-bottom: 16px;
+  line-height: 1.6;
+  font-size: 14px;
 }
 
 .desc-content strong {
@@ -50,61 +55,63 @@
 .feature {
   background: rgba(212, 175, 55, 0.05);
   border-left: 3px solid #d4af37;
-  padding: 20px;
-  margin: 24px 0;
+  padding: 14px 16px;
+  margin: 16px 0;
 }
 
 .feature h3 {
   color: #d4af37;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .feature p {
   color: #999;
   margin: 0;
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .landing-right {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .form-card {
   background: rgba(15, 15, 15, 0.6);
   border: 1px solid #1f1f1f;
   border-radius: 16px;
-  padding: 40px;
+  padding: 32px;
   width: 100%;
-  max-width: 500px;
+  max-width: 460px;
   backdrop-filter: blur(10px);
 }
 
 .form-card h2 {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 600;
   color: #fff;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .form-subtitle {
   color: #888;
-  font-size: 14px;
-  margin-bottom: 32px;
+  font-size: 13px;
+  margin-bottom: 24px;
 }
 
 .form-group {
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
 .form-group label {
   display: block;
   color: #aaa;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   letter-spacing: 0.3px;
 }
 
@@ -113,11 +120,11 @@
   background: linear-gradient(135deg, #d4af37 0%, #8ab44f 100%);
   color: #0a0a0a;
   font-weight: 600;
-  font-size: 15px;
-  padding: 14px;
+  font-size: 14px;
+  padding: 12px;
   border: none;
   border-radius: 8px;
-  margin-top: 8px;
+  margin-top: 6px;
   transition: all 0.2s;
 }
 
@@ -126,7 +133,84 @@
   box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
 }
 
+@media (min-width: 1400px) {
+  .landing {
+    padding: 60px 24px 40px;
+  }
+  
+  .landing-container {
+    gap: 80px;
+  }
+  
+  .logo {
+    width: 120px;
+    margin-bottom: 32px;
+  }
+  
+  .project-desc h1 {
+    font-size: 40px;
+    margin-bottom: 8px;
+  }
+  
+  .subtitle {
+    font-size: 17px;
+    margin-bottom: 28px;
+  }
+  
+  .desc-content p {
+    font-size: 15px;
+    margin-bottom: 18px;
+    line-height: 1.7;
+  }
+  
+  .feature {
+    padding: 16px 18px;
+    margin: 20px 0;
+  }
+  
+  .feature h3 {
+    font-size: 16px;
+  }
+  
+  .feature p {
+    font-size: 14px;
+  }
+  
+  .form-card {
+    padding: 36px;
+    max-width: 500px;
+  }
+  
+  .form-card h2 {
+    font-size: 28px;
+  }
+  
+  .form-subtitle {
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    font-size: 13px;
+    margin-bottom: 7px;
+  }
+  
+  .submit-btn {
+    font-size: 15px;
+    padding: 13px;
+  }
+}
+
 @media (max-width: 1024px) {
+  .landing {
+    padding: 60px 24px 32px;
+    display: block;
+  }
+  
   .landing-container {
     grid-template-columns: 1fr;
     gap: 48px;
@@ -135,5 +219,107 @@
   .landing-left {
     position: relative;
     top: 0;
+  }
+  
+  .logo {
+    width: 110px;
+    margin-bottom: 32px;
+  }
+  
+  .project-desc h1 {
+    font-size: 38px;
+  }
+  
+  .subtitle {
+    font-size: 17px;
+    margin-bottom: 32px;
+  }
+  
+  .desc-content p {
+    font-size: 15px;
+    margin-bottom: 18px;
+  }
+  
+  .feature {
+    padding: 18px;
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .landing {
+    padding: 60px 16px 32px;
+  }
+
+  .logo {
+    width: 100px;
+    margin-bottom: 32px;
+  }
+
+  .project-desc h1 {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .desc-content p {
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+
+  .feature {
+    padding: 16px;
+    margin: 16px 0;
+  }
+
+  .feature h3 {
+    font-size: 15px;
+  }
+
+  .feature p {
+    font-size: 13px;
+  }
+
+  .form-card {
+    padding: 28px 20px;
+  }
+
+  .form-card h2 {
+    font-size: 24px;
+  }
+
+  .form-subtitle {
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .submit-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing {
+    padding: 50px 12px 24px;
+  }
+
+  .project-desc h1 {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .form-card {
+    padding: 24px 16px;
   }
 }

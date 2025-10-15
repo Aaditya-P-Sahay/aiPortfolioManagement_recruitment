@@ -123,6 +123,7 @@
 .response-date {
   color: #666;
   font-size: 13px;
+  white-space: nowrap;
 }
 
 .response-skills {
@@ -218,6 +219,7 @@
   color: #aaa;
   line-height: 1.7;
   margin-bottom: 16px;
+  word-wrap: break-word;
 }
 
 .modal-section strong {
@@ -245,6 +247,7 @@
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
+  word-break: break-all;
 }
 
 .github-link:hover {
@@ -252,13 +255,145 @@
 }
 
 @media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 16px;
+  }
+
   .admin-header {
     flex-direction: column;
     align-items: start;
     gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+  }
+
+  .admin-header h1 {
+    font-size: 24px;
+  }
+
+  .admin-subtitle {
+    font-size: 13px;
+  }
+
+  .logout-btn {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+  }
+
+  .stat-value {
+    font-size: 24px;
+  }
+
+  .responses-list h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .response-item {
+    padding: 16px;
+  }
+
+  .response-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .response-header h3 {
+    font-size: 16px;
+  }
+
+  .response-meta {
+    font-size: 12px;
+  }
+
+  .response-date {
+    font-size: 11px;
+  }
+
+  .response-skills {
+    gap: 8px;
+  }
+
+  .skill-tag {
+    padding: 3px 10px;
+    font-size: 11px;
+  }
+
+  .modal-overlay {
+    padding: 12px;
+    align-items: flex-start;
   }
 
   .modal-content {
-    padding: 24px;
+    padding: 24px 16px;
+    margin-top: 12px;
+  }
+
+  .modal-close {
+    top: 12px;
+    right: 12px;
+    font-size: 28px;
+  }
+
+  .modal-content h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding-right: 32px;
+  }
+
+  .modal-meta {
+    font-size: 12px;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+  }
+
+  .modal-section {
+    margin-bottom: 24px;
+  }
+
+  .modal-section h3 {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  .modal-section p {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-dashboard {
+    padding: 12px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    padding: 20px 12px;
   }
 }
