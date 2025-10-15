@@ -1,22 +1,46 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Landing from './pages/Landing';
-import Section2 from './pages/Section2';
-import Section3 from './pages/Section3';
-import Section4 from './pages/Section4';
-import Success from './pages/Success';
-import Admin from './pages/Admin';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import Landing from './pages/Landing'
+import Understanding from './pages/Understanding'
+import Execution from './pages/Execution'
+import Interest from './pages/Interest'
+import Success from './pages/Success'
+import AdminLogin from './pages/AdminLogin'
+import AdminDashboard from './pages/AdminDashboard'
+import './App.css'
+
+function AdminButton() {
+  const location = useLocation()
+  const showAdminBtn = !location.pathname.startsWith('/admin')
+
+  if (!showAdminBtn) return null
+
+  return (
+    <div className="admin-corner">
+      <button
+        className="admin-btn"
+        onClick={() => window.location.href = '/admin'}
+      >
+        Admin
+      </button>
+    </div>
+  )
+}
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/section-2" element={<Section2 />} />
-        <Route path="/section-3" element={<Section3 />} />
-        <Route path="/section-4" element={<Section4 />} />
-        <Route path="/success" element={<Success />} />
-        <Route path="/admin" element={<Admin />} />
-      </Routes>
+      <div className="app">
+        <AdminButton />
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/apply/understanding" element={<Understanding />} />
+          <Route path="/apply/execution" element={<Execution />} />
+          <Route path="/apply/interest" element={<Interest />} />
+          <Route path="/success" element={<Success />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        </Routes>
+      </div>
     </BrowserRouter>
-  );
+  )
 }

@@ -1,0 +1,139 @@
+.landing {
+  min-height: 100vh;
+  padding: 80px 24px 40px;
+}
+
+.landing-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.landing-left {
+  position: sticky;
+  top: 100px;
+}
+
+.logo {
+  width: 140px;
+  margin-bottom: 48px;
+}
+
+.project-desc h1 {
+  font-size: 42px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #888;
+  margin-bottom: 40px;
+}
+
+.desc-content p {
+  color: #aaa;
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+.desc-content strong {
+  color: #d4af37;
+  font-weight: 600;
+}
+
+.feature {
+  background: rgba(212, 175, 55, 0.05);
+  border-left: 3px solid #d4af37;
+  padding: 20px;
+  margin: 24px 0;
+}
+
+.feature h3 {
+  color: #d4af37;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.feature p {
+  color: #999;
+  margin: 0;
+  font-size: 14px;
+}
+
+.landing-right {
+  display: flex;
+  justify-content: center;
+}
+
+.form-card {
+  background: rgba(15, 15, 15, 0.6);
+  border: 1px solid #1f1f1f;
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+  backdrop-filter: blur(10px);
+}
+
+.form-card h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.form-subtitle {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  color: #aaa;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #d4af37 0%, #8ab44f 100%);
+  color: #0a0a0a;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 8px;
+  transition: all 0.2s;
+}
+
+.submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+}
+
+@media (max-width: 1024px) {
+  .landing-container {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .landing-left {
+    position: relative;
+    top: 0;
+  }
+}

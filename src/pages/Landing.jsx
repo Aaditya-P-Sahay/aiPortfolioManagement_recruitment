@@ -1,257 +1,141 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import FormInput from '../components/FormInput';
-import Button from '../components/Button';
-import { supabase } from '../lib/supabase';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import './Landing.css'
 
 export default function Landing() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     full_name: '',
     bits_id: '',
-    email_id: '',
+    email: '',
     whatsapp_number: ''
-  });
-  const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  })
+  const [errors, setErrors] = useState({})
 
-  const validateSection1 = () => {
-    const newErrors = {};
-
-    if (!formData.full_name.trim()) newErrors.full_name = 'Full name is required';
-    if (!formData.bits_id.trim()) newErrors.bits_id = 'BITS ID is required';
-    if (!formData.email_id.trim()) {
-      newErrors.email_id = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email_id)) {
-      newErrors.email_id = 'Invalid email format';
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+    if (errors[e.target.name]) {
+      setErrors({ ...errors, [e.target.name]: '' })
     }
-    if (!formData.whatsapp_number.trim()) newErrors.whatsapp_number = 'WhatsApp number is required';
+  }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const validate = () => {
+    const newErrors = {}
+    if (!formData.full_name.trim()) newErrors.full_name = 'Required'
+    if (!formData.bits_id.trim()) newErrors.bits_id = 'Required'
+    if (!formData.email.trim()) newErrors.email = 'Required'
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Invalid email'
+    if (!formData.whatsapp_number.trim()) newErrors.whatsapp_number = 'Required'
 
-  const checkUnique = async () => {
-    const { data: existingBitsId } = await supabase
-      .from('ai_advisor_recruitment_responses')
-      .select('bits_id')
-      .eq('bits_id', formData.bits_id)
-      .maybeSingle();
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
-    if (existingBitsId) {
-      setErrors(prev => ({ ...prev, bits_id: 'This BITS ID has already applied' }));
-      return false;
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (validate()) {
+      sessionStorage.setItem('applicationData', JSON.stringify(formData))
+      navigate('/apply/understanding')
     }
-
-    const { data: existingEmail } = await supabase
-      .from('ai_advisor_recruitment_responses')
-      .select('email_id')
-      .eq('email_id', formData.email_id)
-      .maybeSingle();
-
-    if (existingEmail) {
-      setErrors(prev => ({ ...prev, email_id: 'This email has already applied' }));
-      return false;
-    }
-
-    return true;
-  };
-
-  const handleContinue = async () => {
-    if (!validateSection1()) return;
-
-    setIsSubmitting(true);
-    const isUnique = await checkUnique();
-    setIsSubmitting(false);
-
-    if (isUnique) {
-      localStorage.setItem('applicationData', JSON.stringify(formData));
-      navigate('/section-2');
-    }
-  };
+  }
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      display: 'flex',
-      position: 'relative'
-    }}>
-      <a
-        href="/admin"
-        style={{
-          position: 'fixed',
-          top: '24px',
-          right: '24px',
-          fontSize: '11px',
-          color: '#666',
-          textDecoration: 'none',
-          padding: '6px 12px',
-          border: '1px solid #2a2a2a',
-          borderRadius: '4px',
-          background: '#0a0a0a',
-          transition: 'all 0.2s ease',
-          zIndex: 100
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.color = '#c9a55a';
-          e.currentTarget.style.borderColor = '#c9a55a';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.color = '#666';
-          e.currentTarget.style.borderColor = '#2a2a2a';
-        }}
-      >
-        Admin
-      </a>
+    <div className="landing">
+      <div className="landing-container">
+        <div className="landing-left">
+          <img
+            src="https://res.cloudinary.com/dd2syj8aq/image/upload/v1739466054/Asset_4_4x_r36wor.png"
+            alt="SOFI"
+            className="logo"
+          />
 
-      <div style={{
-        flex: 1,
-        padding: '64px',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        maxWidth: '560px'
-      }}>
-        <img
-          src="https://res.cloudinary.com/dd2syj8aq/image/upload/v1739466054/Asset_4_4x_r36wor.png"
-          alt="SOFI"
-          style={{
-            width: '80px',
-            marginBottom: '32px'
-          }}
-        />
+          <div className="project-desc">
+            <h1>AI Advisor</h1>
+            <p className="subtitle">Portfolio Analyzer & Recommendation Engine</p>
 
-        <h1 style={{
-          fontSize: '28px',
-          fontWeight: '600',
-          marginBottom: '16px',
-          color: '#e8e8e8',
-          letterSpacing: '-0.5px'
-        }}>
-          AI Advisor Project
-        </h1>
+            <div className="desc-content">
+              <p>We are launching a new project to develop an AI-powered financial advisor. This is a <strong>client product for an external partner</strong>.</p>
 
-        <p style={{
-          fontSize: '14px',
-          color: '#888',
-          marginBottom: '32px',
-          lineHeight: '1.6'
-        }}>
-          Portfolio Analyzer & Recommendation Engine
-        </p>
+              <p>The core objective is to create an intelligent system that can assist users with their investment journey. This platform will be built around two primary functions:</p>
 
-        <div style={{
-          padding: '24px',
-          background: '#0f0f0f',
-          border: '1px solid #1a1a1a',
-          borderRadius: '8px',
-          marginBottom: '48px'
-        }}>
-          <p style={{
-            fontSize: '13px',
-            lineHeight: '1.8',
-            color: '#b8b8b8'
-          }}>
-            We are launching a new project to develop an AI-powered financial advisor.
-            The core objective is to create an intelligent system that can assist users
-            with their investment journey.
-          </p>
-          <div style={{
-            marginTop: '20px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '12px'
-          }}>
-            <div>
-              <span style={{ color: '#c9a55a', fontSize: '13px', fontWeight: '600' }}>Portfolio Analyzer:</span>
-              <span style={{ color: '#888', fontSize: '13px', marginLeft: '8px' }}>
-                Ingest and analyze personal investment portfolios
-              </span>
-            </div>
-            <div>
-              <span style={{ color: '#c9a55a', fontSize: '13px', fontWeight: '600' }}>Recommendation Engine:</span>
-              <span style={{ color: '#888', fontSize: '13px', marginLeft: '8px' }}>
-                Generate tailored investment recommendations
-              </span>
+              <div className="feature">
+                <h3>Portfolio Analyzer</h3>
+                <p>The system will be capable of ingesting and analyzing a user's personal investment portfolio to provide a clear overview of their current standing.</p>
+              </div>
+
+              <div className="feature">
+                <h3>Recommendation Engine</h3>
+                <p>Based on the analysis, the AI will generate tailored investment recommendations and actionable ideas.</p>
+              </div>
+
+              <p>A key architectural principle of this product is to give priority to the user's self-portfolio, ensuring that all advice is personalized and relevant to their specific holdings.</p>
+
+              <p>The system will also provide automated weekly and/or monthly updates to keep the user informed about their portfolio's performance and new opportunities.</p>
             </div>
           </div>
         </div>
 
-        <div style={{
-          fontSize: '11px',
-          color: '#666',
-          textAlign: 'center'
-        }}>
-          Society of Finance and Investment
-        </div>
-      </div>
+        <div className="landing-right">
+          <div className="form-card">
+            <h2>Apply Now</h2>
+            <p className="form-subtitle">Join us in building this innovative tool</p>
 
-      <div style={{
-        flex: 1,
-        padding: '64px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '#0f0f0f',
-        borderLeft: '1px solid #1a1a1a'
-      }}>
-        <div style={{ width: '100%', maxWidth: '460px' }}>
-          <h2 style={{
-            fontSize: '20px',
-            fontWeight: '600',
-            marginBottom: '32px',
-            color: '#e8e8e8'
-          }}>
-            Begin Application
-          </h2>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>Full Name</label>
+                <input
+                  type="text"
+                  name="full_name"
+                  value={formData.full_name}
+                  onChange={handleChange}
+                  placeholder="Enter your full name"
+                />
+                {errors.full_name && <span className="error">{errors.full_name}</span>}
+              </div>
 
-          <FormInput
-            label="Full Name"
-            required
-            type="text"
-            value={formData.full_name}
-            onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-            error={errors.full_name}
-          />
+              <div className="form-group">
+                <label>BITS ID</label>
+                <input
+                  type="text"
+                  name="bits_id"
+                  value={formData.bits_id}
+                  onChange={handleChange}
+                  placeholder="e.g., 2021A7PS1234G"
+                />
+                {errors.bits_id && <span className="error">{errors.bits_id}</span>}
+              </div>
 
-          <FormInput
-            label="BITS ID"
-            required
-            type="text"
-            placeholder="2021A7PS0001G"
-            value={formData.bits_id}
-            onChange={(e) => setFormData({ ...formData, bits_id: e.target.value })}
-            error={errors.bits_id}
-          />
+              <div className="form-group">
+                <label>Email ID</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="your.email@pilani.bits-pilani.ac.in"
+                />
+                {errors.email && <span className="error">{errors.email}</span>}
+              </div>
 
-          <FormInput
-            label="Email ID"
-            required
-            type="email"
-            value={formData.email_id}
-            onChange={(e) => setFormData({ ...formData, email_id: e.target.value })}
-            error={errors.email_id}
-          />
+              <div className="form-group">
+                <label>WhatsApp Number</label>
+                <input
+                  type="tel"
+                  name="whatsapp_number"
+                  value={formData.whatsapp_number}
+                  onChange={handleChange}
+                  placeholder="+91 XXXXX XXXXX"
+                />
+                {errors.whatsapp_number && <span className="error">{errors.whatsapp_number}</span>}
+              </div>
 
-          <FormInput
-            label="WhatsApp Number"
-            required
-            type="tel"
-            placeholder="+91 XXXXX XXXXX"
-            value={formData.whatsapp_number}
-            onChange={(e) => setFormData({ ...formData, whatsapp_number: e.target.value })}
-            error={errors.whatsapp_number}
-          />
-
-          <Button
-            onClick={handleContinue}
-            disabled={isSubmitting}
-            style={{ width: '100%', marginTop: '8px' }}
-          >
-            {isSubmitting ? 'Checking...' : 'Continue'}
-          </Button>
+              <button type="submit" className="submit-btn">
+                Continue Application
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
